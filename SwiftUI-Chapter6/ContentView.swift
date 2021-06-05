@@ -8,10 +8,25 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var isError: Bool = false
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        Button(action: {
+            isError = true
+        }){
+            Text("Alert テスト")
+        }.alert(isPresented: $isError) {
+            Alert(title: Text("エラー"),
+                  message: Text("メッセージ文"),
+                  primaryButton:.destructive(Text("削除する"), action: {}),
+                  secondaryButton: .cancel(Text("キャンセル"),action :{})
+            )
+        }
     }
+}
+
+func okAction(){
+    print("OKボタンが選ばれました．")
 }
 
 struct ContentView_Previews: PreviewProvider {
